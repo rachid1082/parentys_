@@ -1,9 +1,11 @@
-"use client"
+export const dynamic = "force-dynamic";
 
-import { Navbar } from "@/components/navbar"
-import { Footer } from "@/components/footer"
-import { useLanguage } from "@/contexts/language-context"
-import { t } from "@/lib/translations"
+"use client";
+
+import { Navbar } from "@/components/navbar";
+import { Footer } from "@/components/footer";
+import { useLanguage } from "@/contexts/language-context";
+import { t } from "@/lib/translations";
 
 const VALUES = [
   {
@@ -31,11 +33,11 @@ const VALUES = [
     titleKey: "valueCulturalFit" as const,
     descKey: "valueCulturalFitDesc" as const,
   },
-]
+];
 
 export default function AboutPage() {
-  const { language } = useLanguage()
-  const dir = language === "ar" ? "rtl" : "ltr"
+  const { language } = useLanguage();
+  const dir = language === "ar" ? "rtl" : "ltr";
 
   return (
     <div dir={dir}>
@@ -49,7 +51,9 @@ export default function AboutPage() {
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground font-display mb-6">
                 {t("aboutPageTitle", language)}
               </h1>
-              <p className="text-xl md:text-2xl font-accent text-accent mb-8">{t("tagline", language)}</p>
+              <p className="text-xl md:text-2xl font-accent text-accent mb-8">
+                {t("tagline", language)}
+              </p>
             </div>
           </div>
         </section>
@@ -62,8 +66,12 @@ export default function AboutPage() {
                 <h2 className="text-3xl md:text-4xl font-bold text-foreground font-display mb-6">
                   {t("ourMission", language)}
                 </h2>
-                <p className="text-lg text-muted-foreground leading-relaxed mb-4">{t("missionText1", language)}</p>
-                <p className="text-lg text-muted-foreground leading-relaxed">{t("missionText2", language)}</p>
+                <p className="text-lg text-muted-foreground leading-relaxed mb-4">
+                  {t("missionText1", language)}
+                </p>
+                <p className="text-lg text-muted-foreground leading-relaxed">
+                  {t("missionText2", language)}
+                </p>
               </div>
               <div className="rounded-2xl overflow-hidden shadow-lg">
                 <img
@@ -104,7 +112,9 @@ export default function AboutPage() {
                   <h3 className="text-xl font-semibold text-foreground font-display mb-3">
                     {t(value.titleKey, language)}
                   </h3>
-                  <p className="text-muted-foreground leading-relaxed">{t(value.descKey, language)}</p>
+                  <p className="text-muted-foreground leading-relaxed">
+                    {t(value.descKey, language)}
+                  </p>
                 </div>
               ))}
             </div>
@@ -126,8 +136,12 @@ export default function AboutPage() {
                 <h2 className="text-3xl md:text-4xl font-bold text-foreground font-display mb-6">
                   {t("ourStory", language)}
                 </h2>
-                <p className="text-lg text-muted-foreground leading-relaxed mb-4">{t("storyText1", language)}</p>
-                <p className="text-lg text-muted-foreground leading-relaxed">{t("storyText2", language)}</p>
+                <p className="text-lg text-muted-foreground leading-relaxed mb-4">
+                  {t("storyText1", language)}
+                </p>
+                <p className="text-lg text-muted-foreground leading-relaxed">
+                  {t("storyText2", language)}
+                </p>
               </div>
             </div>
           </div>
@@ -136,5 +150,5 @@ export default function AboutPage() {
         <Footer />
       </main>
     </div>
-  )
+  );
 }

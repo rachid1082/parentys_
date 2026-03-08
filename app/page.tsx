@@ -1,7 +1,32 @@
+"use client"
+
+import { Navbar } from "@/components/navbar"
+import { HeroSection } from "@/components/hero-section"
+import { ValuesSection } from "@/components/values-section"
+import { WorkshopsSection } from "@/components/workshops-section"
+import { CategoriesSection } from "@/components/categories-section"
+import { ExpertsSection } from "@/components/experts-section"
+import { QuickPathSection } from "@/components/quickpath-section"
+import { Footer } from "@/components/footer"
+import { useLanguage } from "@/contexts/language-context"
+
 export default function Home() {
+  const { language } = useLanguage()
+
+  const dir = language === "ar" ? "rtl" : "ltr"
+
   return (
-    <main>
-      <h1>Parentys Clean Starter</h1>
-    </main>
-  );
+    <div dir={dir}>
+      <main className="min-h-screen">
+        <Navbar />
+        <HeroSection />
+        <ValuesSection />
+        <ExpertsSection />
+        <WorkshopsSection />
+        <CategoriesSection />
+        <QuickPathSection />
+        <Footer />
+      </main>
+    </div>
+  )
 }

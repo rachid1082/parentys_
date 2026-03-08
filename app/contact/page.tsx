@@ -1,16 +1,18 @@
-"use client"
+export const dynamic = "force-dynamic";
 
-import { Navbar } from "@/components/navbar"
-import { Footer } from "@/components/footer"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Textarea } from "@/components/ui/textarea"
-import { useLanguage } from "@/contexts/language-context"
-import { t } from "@/lib/translations"
+"use client";
+
+import { Navbar } from "@/components/navbar";
+import { Footer } from "@/components/footer";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { useLanguage } from "@/contexts/language-context";
+import { t } from "@/lib/translations";
 
 export default function ContactPage() {
-  const { language } = useLanguage()
-  const dir = language === "ar" ? "rtl" : "ltr"
+  const { language } = useLanguage();
+  const dir = language === "ar" ? "rtl" : "ltr";
 
   return (
     <div dir={dir}>
@@ -24,26 +26,47 @@ export default function ContactPage() {
                 <h1 className="text-4xl md:text-5xl font-bold text-foreground font-display mb-4">
                   {t("contactUs", language)}
                 </h1>
-                <p className="text-lg text-muted-foreground">{t("contactDesc", language)}</p>
+                <p className="text-lg text-muted-foreground">
+                  {t("contactDesc", language)}
+                </p>
               </div>
 
               <form className="space-y-6 bg-card rounded-2xl p-8 shadow-sm border border-border/50">
                 <div>
-                  <label htmlFor="name" className="block text-sm font-medium text-foreground mb-2 font-display">
+                  <label
+                    htmlFor="name"
+                    className="block text-sm font-medium text-foreground mb-2 font-display"
+                  >
                     {t("yourName", language)}
                   </label>
-                  <Input id="name" type="text" placeholder={t("namePlaceholder", language)} className="rounded-xl" />
+                  <Input
+                    id="name"
+                    type="text"
+                    placeholder={t("namePlaceholder", language)}
+                    className="rounded-xl"
+                  />
                 </div>
 
                 <div>
-                  <label htmlFor="email" className="block text-sm font-medium text-foreground mb-2 font-display">
+                  <label
+                    htmlFor="email"
+                    className="block text-sm font-medium text-foreground mb-2 font-display"
+                  >
                     {t("yourEmail", language)}
                   </label>
-                  <Input id="email" type="email" placeholder={t("emailPlaceholder", language)} className="rounded-xl" />
+                  <Input
+                    id="email"
+                    type="email"
+                    placeholder={t("emailPlaceholder", language)}
+                    className="rounded-xl"
+                  />
                 </div>
 
                 <div>
-                  <label htmlFor="subject" className="block text-sm font-medium text-foreground mb-2 font-display">
+                  <label
+                    htmlFor="subject"
+                    className="block text-sm font-medium text-foreground mb-2 font-display"
+                  >
                     {t("subject", language)}
                   </label>
                   <Input
@@ -55,7 +78,10 @@ export default function ContactPage() {
                 </div>
 
                 <div>
-                  <label htmlFor="message" className="block text-sm font-medium text-foreground mb-2 font-display">
+                  <label
+                    htmlFor="message"
+                    className="block text-sm font-medium text-foreground mb-2 font-display"
+                  >
                     {t("message", language)}
                   </label>
                   <Textarea
@@ -81,5 +107,5 @@ export default function ContactPage() {
         <Footer />
       </main>
     </div>
-  )
+  );
 }

@@ -141,7 +141,7 @@
 
 @layer base {
   * {
-  @apply border border-[var(--border)] outline outline-[color:var(--ring)];
+  @apply border-border outline-ring/50;
 }
 
 

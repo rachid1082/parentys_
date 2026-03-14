@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic"
+
 import type React from "react"
 import type { Metadata } from "next"
 import { IBM_Plex_Sans, Plus_Jakarta_Sans, Marck_Script } from "next/font/google"
@@ -47,9 +49,9 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode
-}>) {
+}) {
   return (
     <html lang="en">
       <body

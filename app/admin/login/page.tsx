@@ -55,14 +55,31 @@ export default function AdminLoginPage() {
         return
       }
 
-      const { data: userData, error: userError } = await createClient()
-        .from("users")
-        .select("role")
-        .eq("id", authData.user.id)
+      // Check for approved profile with permissions
+      const supabase = createClient()
+      
+      const { data: profile } = await supabase
+        .from("profiles")
+        .select("id, status")
+        .eq("user_id", authData.user.id)
+        .eq("status", "approved")
         .single()
 
-      if (userError || !userData || userData.role !== "admin") {
-        await createClient().auth.signOut()
+      if (!profile) {
+        await supabase.auth.signOut()
+        setError("Access denied. Approved profile required.")
+        setLoading(false)
+        return
+      }
+
+      // Check if profile has any admin permissions
+      const { data: permissions } = await supabase
+        .from("profile_permissions")
+        .select("permission")
+        .eq("profile_id", profile.id)
+
+      if (!permissions || permissions.length === 0) {
+        await supabase.auth.signOut()
         setError("Access denied. Admin privileges required.")
         setLoading(false)
         return

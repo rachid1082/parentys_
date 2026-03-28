@@ -51,6 +51,7 @@ export default function AdminLoginPage() {
 
       if (authError) {
         setError("Invalid email or password")
+        setSuccess("")
         setLoading(false)
         return
       }
@@ -68,6 +69,7 @@ export default function AdminLoginPage() {
       if (!profile) {
         await supabase.auth.signOut()
         setError("Access denied. Approved profile required.")
+        setSuccess("")
         setLoading(false)
         return
       }
@@ -81,6 +83,7 @@ export default function AdminLoginPage() {
       if (!permissions || permissions.length === 0) {
         await supabase.auth.signOut()
         setError("Access denied. Admin privileges required.")
+        setSuccess("")
         setLoading(false)
         return
       }
@@ -89,6 +92,7 @@ export default function AdminLoginPage() {
       router.refresh()
     } catch {
       setError("An error occurred. Please try again.")
+      setSuccess("")
       setLoading(false)
     }
   }
@@ -107,6 +111,7 @@ export default function AdminLoginPage() {
       // Success case: no error
       if (!error) {
         setSuccess("A recovery email has been sent.")
+        setError("")
         setLoading(false)
         return
       }
@@ -114,15 +119,18 @@ export default function AdminLoginPage() {
       // Supabase sometimes returns a 'security' error but still sends the email
       if (error.message?.includes("For security reasons")) {
         setSuccess("A recovery email has been sent.")
+        setError("")
         setLoading(false)
         return
       }
 
       // Real error
       setError("Failed to send recovery email.")
+      setSuccess("")
       setLoading(false)
     } catch {
       setError("An error occurred. Please try again.")
+      setSuccess("")
       setLoading(false)
     }
   }
@@ -146,8 +154,11 @@ export default function AdminLoginPage() {
           </CardHeader>
           <CardContent>
             <form onSubmit={mode === "login" ? handleLogin : handleForgotPassword} className="space-y-4">
-              {error && <div className="p-3 text-sm text-red-600 bg-red-50 rounded-lg">{error}</div>}
-              {success && <div className="p-3 text-sm text-green-600 bg-green-50 rounded-lg">{success}</div>}
+              {error ? (
+                <div className="p-3 text-sm text-red-600 bg-red-50 rounded-lg">{error}</div>
+              ) : success ? (
+                <div className="p-3 text-sm text-green-600 bg-green-50 rounded-lg">{success}</div>
+              ) : null}
               <div className="space-y-2">
                 <Label htmlFor="email">Email</Label>
                 <Input

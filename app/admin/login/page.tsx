@@ -11,9 +11,12 @@ import { Label } from "@/components/ui/label"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import Loading from "./loading"
 
-const REDIRECT_URL = typeof window !== "undefined" 
-  ? `${window.location.origin}/admin/reset?type=recovery` 
-  : "/admin/reset?type=recovery"
+function getResetRedirectUrl() {
+  // Use NEXT_PUBLIC_SITE_URL if set, otherwise detect from window
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL 
+    || (typeof window !== "undefined" ? window.location.origin : "https://parentys.com")
+  return `${baseUrl}/admin/reset`
+}
 
 export default function AdminLoginPage() {
   const [email, setEmail] = useState("")
@@ -107,7 +110,7 @@ export default function AdminLoginPage() {
     try {
       // Supabase may return an error even when the email is sent.
       await createClient().auth.resetPasswordForEmail(email, {
-        redirectTo: REDIRECT_URL,
+        redirectTo: getResetRedirectUrl(),
       })
       // Always show success unless the request throws.
       setSuccess("A recovery email has been sent.")

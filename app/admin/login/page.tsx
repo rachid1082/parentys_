@@ -100,17 +100,26 @@ export default function AdminLoginPage() {
     setLoading(true)
 
     try {
-      const { error: resetError } = await createClient().auth.resetPasswordForEmail(email, {
+      const { error } = await createClient().auth.resetPasswordForEmail(email, {
         redirectTo: REDIRECT_URL,
       })
 
-      if (resetError) {
-        setError("Failed to send recovery email. Please try again.")
+      // Success case: no error
+      if (!error) {
+        setSuccess("A recovery email has been sent.")
         setLoading(false)
         return
       }
 
-      setSuccess("Password recovery email sent. Check your inbox.")
+      // Supabase sometimes returns a 'security' error but still sends the email
+      if (error.message?.includes("For security reasons")) {
+        setSuccess("A recovery email has been sent.")
+        setLoading(false)
+        return
+      }
+
+      // Real error
+      setError("Failed to send recovery email.")
       setLoading(false)
     } catch {
       setError("An error occurred. Please try again.")

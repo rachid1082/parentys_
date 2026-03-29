@@ -12,6 +12,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import Loading from "./loading"
 
 const redirectTo = process.env.NEXT_PUBLIC_SITE_URL + "/admin/reset"
+console.log("redirectTo:", redirectTo)
 
 export default function AdminLoginPage() {
   const [email, setEmail] = useState("")
